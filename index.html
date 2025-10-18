@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Feedback Sentiment Analyzer</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    textarea {
+      width: 80%;
+      height: 100px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Employee Feedback Sentiment Analyzer</h1>
+  <p>Type feedback below to analyze its sentiment:</p>
+  
+  <textarea id="feedback" placeholder="Enter employee feedback here..."></textarea>
+  <br>
+  <button onclick="analyzeSentiment()">Analyze</button>
+  
+  <div class="result" id="result"></div>
+
+  <script>
+    function analyzeSentiment() {
+      const feedback = document.getElementById("feedback").value.toLowerCase();
+      const resultDiv = document.getElementById("result");
+      
+      if (feedback.includes("love") || feedback.includes("great") || feedback.includes("good")) {
+        resultDiv.innerHTML = "😊 Positive Feedback!";
+        resultDiv.style.color = "green";
+      } else if (feedback.includes("bad") || feedback.includes("poor") || feedback.includes("hate")) {
+        resultDiv.innerHTML = "😞 Negative Feedback!";
+        resultDiv.style.color = "red";
+      } else {
+        resultDiv.innerHTML = "😐 Neutral Feedback!";
+        resultDiv.style.color = "gray";
+      }
+    }
+  </script>
+</body>
+</html>
