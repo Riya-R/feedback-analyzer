@@ -47,22 +47,50 @@
   
   <div class="result" id="result"></div>
 
-  <script>
-    function analyzeSentiment() {
-      const feedback = document.getElementById("feedback").value.toLowerCase();
-      const resultDiv = document.getElementById("result");
-      
-      if (feedback.includes("love") || feedback.includes("great") || feedback.includes("good")) {
-        resultDiv.innerHTML = "😊 Positive Feedback!";
-        resultDiv.style.color = "green";
-      } else if (feedback.includes("bad") || feedback.includes("poor") || feedback.includes("hate")) {
-        resultDiv.innerHTML = "😞 Negative Feedback!";
-        resultDiv.style.color = "red";
-      } else {
-        resultDiv.innerHTML = "😐 Neutral Feedback!";
-        resultDiv.style.color = "gray";
+<script>
+  function analyzeSentiment() {
+    const feedback = document.getElementById("feedback").value.toLowerCase();
+    const resultDiv = document.getElementById("result");
+
+    // Expanded keyword lists
+    const positiveWords = [
+      "love", "great", "good", "amazing", "awesome", "excellent", "supportive",
+      "helpful", "appreciate", "fantastic", "wonderful", "happy", "satisfied",
+      "improve", "motivated", "best", "positive"
+    ];
+
+    const negativeWords = [
+      "bad", "poor", "terrible", "awful", "hate", "worse", "worst", "dissatisfied",
+      "unhappy", "slow", "angry", "problem", "issue", "stress", "pressure", "boring"
+    ];
+
+    let sentiment = "neutral";
+    let color = "gray";
+    let emoji = "😐";
+
+    // Simple rule-based detection
+    for (let word of positiveWords) {
+      if (feedback.includes(word)) {
+        sentiment = "positive";
+        color = "green";
+        emoji = "😊";
+        break;
       }
     }
-  </script>
+
+    for (let word of negativeWords) {
+      if (feedback.includes(word)) {
+        sentiment = "negative";
+        color = "red";
+        emoji = "😞";
+        break;
+      }
+    }
+
+    resultDiv.innerHTML = `${emoji} ${sentiment.charAt(0).toUpperCase() + sentiment.slice(1)} Feedback!`;
+    resultDiv.style.color = color;
+  }
+</script>
+
 </body>
 </html>
